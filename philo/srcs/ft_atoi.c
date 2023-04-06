@@ -6,11 +6,11 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:10:16 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/05 20:31:50 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/06 19:23:15 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/philo.h"
 
 static int	ft_isspace(char c)
 {
@@ -19,7 +19,7 @@ static int	ft_isspace(char c)
 	return (0);
 }
 
-int	ft_isdigit(int c)
+static int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (c);
@@ -49,7 +49,7 @@ int	ft_atoi(const char *str)
 	if (*str == '-' || *str == '+')
 	{
 		if (!ft_isdigit(*(str + 1)))
-			ft_error();
+			ft_error("Argument Error");
 		if (*str == '-')
 			sign *= -1;
 		str++;
@@ -60,7 +60,7 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	result = result * sign;
-	if (*str != '\0' || result > MAX_INT || result < MIN_INT)
-		ft_error();
+	if (*str != '\0' || result > 2147483647 || result < -2147483648)
+		ft_error("Argument Rage Error");
 	return ((int)result);
 }

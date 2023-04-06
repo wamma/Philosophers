@@ -6,7 +6,7 @@
 #    By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 19:26:01 by hyungjup          #+#    #+#              #
-#    Updated: 2023/04/05 19:46:17 by hyungjup         ###   ########.fr        #
+#    Updated: 2023/04/06 21:54:56 by hyungjup         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,10 @@ MAN_OBJS_DIR = ./objs
 
 MAN_INC_DIR = ./includes
 
-SRCS = ./srcs/philo.c \
+SRCS = ./srcs/main.c \
 	   ./srcs/philo_utils.c \
-	   
+	   ./srcs/philo_init.c \
+	   ./srcs/ft_atoi.c \
 
 OBJS = $(addprefix $(MAN_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 
@@ -35,7 +36,7 @@ all : $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAG) -o $@ $^
-	@echo "\033[1;32mcreated"
+	@echo "\033[1;32m$(NAME) created"
 
 $(MAN_OBJS_DIR) :
 	@mkdir -p $(MAN_OBJS_DIR)
@@ -48,7 +49,7 @@ clean :
 
 fclean : clean
 	@$(RM) $(NAME) $(BONUS_NAME)
-	@echo "\033[0;33mall deleted"
+	@echo "\033[0;33m all deleted"
 
 re : fclean all
 
