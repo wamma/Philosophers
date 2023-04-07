@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/06 21:11:01 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:38:39 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 
 typedef struct s_info
 {
-	int		id;
-	int		left_fork;
-	int		right_fork;
-	int		eat_cnt;
+	int			id;
+	int			left_fork;
+	int			right_fork;
+	int			eat_cnt;
+	ptherad_t	id;
 }	t_info;
 
 typedef struct s_philo
@@ -32,14 +33,13 @@ typedef struct s_philo
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat_num;
-	int				start_time;
-	int				die;
 	int				eat_check;
-	pthread_t		thread_id;
-	t_info			*info;
-	pthread_mutex_t	write;
+	long long		start_time;
+	int				die;
+	pthread_mutex_t	philo;
 	pthread_mutex_t	eat;
 	pthread_mutex_t	*fork;
+	t_info			*info;
 }	t_philo;
 
 int	ft_error(char *err);

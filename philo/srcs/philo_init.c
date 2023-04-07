@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:13:15 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/06 21:57:39 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:49:01 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int	ft_mutex_init(t_philo *philo)
 {
 	int	i;
 
-	if (pthread_mutex_init(&(philo->write), NULL))
+	if (pthread_mutex_init(&(philo->philo), NULL))
 		return (-1);
-	if (pthread_mutex_lock(&(philo->eat)))
+	if (pthread_mutex_init(&(philo->eat), NULL))
 		return (-1);
-	philo->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t *) * philo->philo_num);
-	if (!philo->fork)
+	philo->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t *) \
+	* philo->philo_num);
+	if (!(philo->fork))
 		return (-1);
 	i = 0;
 	while (i < philo->philo_num)
@@ -30,6 +31,24 @@ int	ft_mutex_init(t_philo *philo)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_pthread_init(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	philo->info = (t_philo *)malloc(sizeof(t_philo *) * philo->philo_num);
+	if (!(philo->info))
+		return (-1);
+	while (i < philo->philo_num)
+	{
+		philo->info[i].id = i;
+		philo->info[i].left_fork = i;
+		philo->info[i].right_fork = i;
+		philo->info[i].eat_cnt = 0;
+		i++;
+	}
 }
 
 int	ft_input_philo(t_philo *philo, int ac, char **av)
@@ -50,7 +69,7 @@ int	ft_input_philo(t_philo *philo, int ac, char **av)
 	}
 	if (ft_mutex_init(philo))
 		return (-1);
-	// if (ft_pthread_init(philo))
-	// 	return (-1);
+	if (ft_pthread_init(philo))
+		return (-1);
 	return (0);
 }
