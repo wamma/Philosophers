@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 19:57:23 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/11 20:42:56 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/04/11 15:43:50 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/04/11 21:16:30 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	main(int ac, char **av)
+long long	ft_time(void)
 {
-	t_philo	philo;
+	struct timeval	time;
+	long long		ms;
 
-	if (ac != 5 && ac != 6)
-		return (ft_error("Error in argument"));
-	if (ft_input_philo(&philo, ac, av))
-		return (ft_error("Error in input_philo"));
-	if (ft_start_philo(&philo))
-		return (ft_error("Error in start_philo"));
-	return (0);
+	gettimeofday(&time, NULL);
+	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (ms);
+}
+
+int	ft_start_philo(t_philo *philo, t_info *info)
+{
+	int		i;
+
+	i = 0;
+	philo->start_time = ft_time();
+	while (i < philo->philo_num)
+	{
+		philo
+	}
 }

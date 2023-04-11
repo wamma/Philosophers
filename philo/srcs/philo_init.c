@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:13:15 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/07 19:49:01 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/11 21:14:57 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	ft_pthread_init(t_philo *philo)
 		philo->info[i].left_fork = i;
 		philo->info[i].right_fork = i;
 		philo->info[i].eat_cnt = 0;
+		philo->info[i].check_death_time = 0;
 		i++;
 	}
+	return (0);
 }
 
 int	ft_input_philo(t_philo *philo, int ac, char **av)

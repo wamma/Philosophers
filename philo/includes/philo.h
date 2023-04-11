@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/07 15:38:39 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:38:31 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_info
 {
-	int			id;
-	int			left_fork;
-	int			right_fork;
-	int			eat_cnt;
-	ptherad_t	id;
+	int				id;
+	int				left_fork;
+	int				right_fork;
+	int				eat_cnt;
+	int				check_death_time;
+	pthread_t		thread_id;
+	struct s_philo	philo;
 }	t_info;
 
 typedef struct s_philo
