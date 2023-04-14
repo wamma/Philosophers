@@ -6,50 +6,54 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:43:50 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/12 20:36:08 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/14 19:21:45 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ft_philo_do(t_philo *philo, t_info *info)
+int	ft_philo_do(t_arg *arg, t_philo *philo)
 {
-	pthread_mutex_lock(&(philo->eat));
-	printf("%s", philo->id);
-	philo	
+
 }
 
-void	*ft_pthread(void *philo)
+void	*ft_pthread(void *philo_cp)
 {
-	t_philo	*t_philo;
-	t_info	*tmp_philo;
+	t_arg	*arg;
+	t_philo	*philo;
 
-	tmp_philo = (t_info *)t_philo;
-	t_philo = &tmp_philo->philo;
-	if (tmp_philo->id % 2)
-		usleep(10000);
-	while (!(philo->die))
+	philo = philo_cp;
+	arg = philo->arg;
+	if (philo->id % 2 == 0)
+		usleep(1000);
+	while (!arg->die)
 	{
-		if (ft_philo_do(philo, tmp_philo))
+		ft_philo_do(arg, philo);
+		if (arg->eat_num == philo->eat_cnt)
+		{
+			arg->finish_eat++;
+			break ;
+		}
+		ft_philo_printf(arg, philo->id, "is sleeping");
+		ft_time_taken(arg, (long long)arg->time_to_sleep);
+		ft_philo_printf(arg, philo->id, "is thinking");
 	}
 	return (0);
 }
 
-int	ft_start_philo(t_philo *philo)
+int	ft_start_philo(t_arg *arg, t_philo *philo)
 {
-	int		i;
-	void	*tmp_philo;
+	int	i;
 
 	i = 0;
-	philo->start_time = ft_time();
-	while (i < philo->philo_num)
+	arg->start_time = ft_time();
+	while (i < arg->philo_num)
 	{
-		philo->info[i].check_death_time = ft_time();
-		tmp_philo = (void *)&(philo->info[i]);
-		if (pthread_create(&(philo->info[i].thread_id), NULL, \
-					ft_pthread, tmp_philo))
-			return (-1);
+		philo[i].check_death_time = ft_time();
+		if (pthread_create(&(philo[i].thread_id), NULL, \
+		ft_pthread, &(philo[i])))
+			return (1);
 		i++;
 	}
-	죽었는지 체크
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/12 20:21:58 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/14 19:41:37 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,52 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef struct s_info
+typedef struct s_philo
 {
 	int				id;
 	int				left_fork;
 	int				right_fork;
 	int				eat_cnt;
 	int				check_death_time;
+	int				last_eat_time;
 	pthread_t		thread_id;
-	struct s_philo	philo;
-}	t_info;
+	struct s_arg	*arg;
+}	t_philo;
 
-typedef struct s_philo
+typedef struct s_arg
 {
 	int				philo_num;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				must_eat_num;
-	int				eat_check;
+	int				eat_num;
 	long long		start_time;
 	int				die;
-	pthread_mutex_t	philo;
-	pthread_mutex_t	eat;
-	pthread_mutex_t	*fork;
-	t_info			*info;
-}	t_philo;
+	int				finish_eat;
+	pthread_mutex_t	print;
+	pthread_mutex_t	*forks;
+	t_philo			*philo;
+}	t_arg;
 
-int	ft_error(char *err);
-int	ft_atoi(const char *str);
-int	ft_input_philo(t_philo *philo, int ac, char **av);
-int	ft_mutex_init(t_philo *philo);
+/*philo_check.c*/
+/*philo_init.c*/
+int			ft_mutex_init(t_arg *arg);
+int			ft_philo_init(t_arg *arg);
+int			ft_input_arg(t_arg *arg, int ac, char **av);
+
+/*philo_utils.c*/
+int			ft_error(char *err);
+
+/*philo.c*/
+int			ft_philo_do(t_arg *arg, t_philo *philo);
+void		*ft_pthread(void *philo_cp);
+int			ft_start_philo(t_arg *arg, t_philo *philo);
+
+/*time.c*/
+long long	ft_time(void);
+void		ft_time_taken(t_arg *arg, long long wait_time);
+
+/*ft_atoi.c*/
+int			ft_atoi(const char *str);
 
 #endif
