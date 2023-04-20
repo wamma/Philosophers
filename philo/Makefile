@@ -6,14 +6,14 @@
 #    By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 19:26:01 by hyungjup          #+#    #+#              #
-#    Updated: 2023/04/12 15:14:42 by hyungjup         ###   ########.fr        #
+#    Updated: 2023/04/20 17:45:17 by hyungjup         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror -g
 
 MAN_SRCS_DIR =	./srcs
 
@@ -21,10 +21,13 @@ MAN_OBJS_DIR = ./objs
 
 MAN_INC_DIR = ./includes
 
-SRCS = ./srcs/main.c \
-	   ./srcs/philo_utils.c \
+SRCS = ./srcs/ft_atoi.c \
+	   ./srcs/main.c \
+	   ./srcs/philo_check.c \
 	   ./srcs/philo_init.c \
-	   ./srcs/ft_atoi.c \
+	   ./srcs/philo_utils.c \
+	   ./srcs/philo.c \
+	   ./srcs/time.c \
 
 OBJS = $(addprefix $(MAN_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 

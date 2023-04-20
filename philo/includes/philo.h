@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/14 19:41:37 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:37:04 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_arg
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				eat_num;
+	int				must_eat_num;
 	long long		start_time;
 	int				die;
 	int				finish_eat;
@@ -47,15 +47,17 @@ typedef struct s_arg
 }	t_arg;
 
 /*philo_check.c*/
+int			ft_death_check(t_arg *arg, t_philo *philo);
 /*philo_init.c*/
 int			ft_mutex_init(t_arg *arg);
 int			ft_philo_init(t_arg *arg);
-int			ft_input_arg(t_arg *arg, int ac, char **av);
+int			ft_init_arg(t_arg *arg, int ac, char **av);
 
 /*philo_utils.c*/
 int			ft_error(char *err);
 
 /*philo.c*/
+int			ft_philo_printf(t_arg *arg, int id, char *message);
 int			ft_philo_do(t_arg *arg, t_philo *philo);
 void		*ft_pthread(void *philo_cp);
 int			ft_start_philo(t_arg *arg, t_philo *philo);
