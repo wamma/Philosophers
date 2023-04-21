@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 21:32:35 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/20 19:25:34 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/21 16:24:29 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_time_taken(t_arg *arg, long long wait_time)
 	long long	current_time;
 
 	start_time = ft_time();
-	while (!(arg->finish_eat))
+	while (!(arg->die))
 	{
 		current_time = ft_time();
 		if ((current_time - start_time) >= wait_time)

@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 5 && argc != 6)
 		return (ft_error("Error: argument"));
-	if (ft_init_arg(&arg, argc, argv))
+	if (ft_arg_init(&arg, argc, argv))
 		return (ft_error("Error: input_arg"));
 	if (ft_start_philo(&arg, arg.philo))
 		return (ft_error("Error: start_philo"));

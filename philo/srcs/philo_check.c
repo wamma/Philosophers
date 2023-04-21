@@ -6,11 +6,11 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:20:20 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/20 20:21:26 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:29:50 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	ft_death_check(t_arg *arg, t_philo *philo)
 {

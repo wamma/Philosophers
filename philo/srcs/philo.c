@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:43:50 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/20 20:15:44 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:47:59 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	ft_philo_do(t_arg *arg, t_philo *philo)
 		pthread_mutex_lock(&(arg->forks[philo->right_fork]));
 		ft_philo_printf(arg, philo->id, "has taken a fork");
 		ft_philo_printf(arg, philo->id, "is eating");
-		philo->last_eat_time = ft_time();
+		philo->check_death_time = ft_time();
 		philo->eat_cnt++;
 		ft_time_taken(arg, (long long)arg->time_to_eat);
 		pthread_mutex_unlock(&(arg->forks[philo->right_fork]));
 	}
-	pthread_mutex_unlock(&(arg->forks[philo->right_fork]));
+	pthread_mutex_unlock(&(arg->forks[philo->left_fork]));
 	return (0);
 }
 
@@ -79,6 +79,13 @@ int	ft_start_philo(t_arg *arg, t_philo *philo)
 			return (1);
 		i++;
 	}
+	i = 0;
+	while (i < arg->philo_num)
+		pthread_join(philo[i++].thread_id, NULL);
 	ft_death_check(arg, philo);
+	i = 0;
+	while (i < arg->philo_num)
+		pthread_mutex_destroy(&(arg->forks[i++]));
+	pthread_mutex_destroy(&(arg->print));
 	return (0);
 }
