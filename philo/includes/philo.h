@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/21 19:40:35 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:50:01 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_philo
 	int				left_fork;
 	int				right_fork;
 	int				eat_cnt;
-	int				check_death_time;
 	int				last_eat_time;
 	pthread_t		thread_id;
 	struct s_arg	*arg;
@@ -40,10 +39,10 @@ typedef struct s_arg
 	int				must_eat_num;
 	long long		start_time;
 	int				die;
-	int				finish_eat;
 	int				eat_check;
+	int				finish_eat;
 	pthread_mutex_t	print;
-	pthread_mutex_t	eating;
+	pthread_mutex_t	eat;
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
 }	t_arg;
@@ -60,6 +59,7 @@ int			ft_error(char *err);
 void		ft_free_thread(t_arg *arg);
 
 /*philo.c*/
+void		ft_philo_eat(t_arg *arg, t_philo *philo);
 int			ft_philo_printf(t_arg *arg, int id, char *message);
 int			ft_philo_do(t_arg *arg, t_philo *philo);
 void		*ft_pthread(void *philo_cp);

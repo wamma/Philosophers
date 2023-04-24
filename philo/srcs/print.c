@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 19:57:23 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/24 19:59:51 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/04/24 16:47:56 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/04/24 21:32:30 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
-int	main(int argc, char **argv)
+int	ft_philo_printf(t_arg *arg, int id, char *message)
 {
-	t_arg	arg;
+	long long	current_time;
 
-	if (argc != 5 && argc != 6)
-		return (ft_error("Error: argument"));
-	if (ft_arg_init(&arg, argc, argv))
-		return (ft_error("Error: input_arg"));
-	if (ft_start_philo(&arg, arg.philo))
-		return (ft_error("Error: start_philo"));
+	current_time = ft_time();
+	pthread_mutex_lock(&(arg->print));
+	if (!(arg->die))
+		printf("%lld %d %s \n", current_time - arg->start_time, id + 1, message);
+	pthread_mutex_unlock(&(arg->print));
 	return (0);
 }

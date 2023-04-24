@@ -6,7 +6,7 @@
 #    By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 19:26:01 by hyungjup          #+#    #+#              #
-#    Updated: 2023/04/20 17:45:17 by hyungjup         ###   ########.fr        #
+#    Updated: 2023/04/24 17:08:01 by hyungjup         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS = ./srcs/ft_atoi.c \
 	   ./srcs/philo_utils.c \
 	   ./srcs/philo.c \
 	   ./srcs/time.c \
+	   ./srcs/print.c
 
 OBJS = $(addprefix $(MAN_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 

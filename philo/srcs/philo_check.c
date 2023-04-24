@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:20:20 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/21 19:29:50 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/24 22:00:32 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_death_check(t_arg *arg, t_philo *philo)
 		while (i < arg->philo_num)
 		{
 			current_time = ft_time();
-			if (current_time - philo[i].last_eat_time <= arg->time_to_die)
+			if (current_time - philo[i].last_eat_time > arg->time_to_die)
 			{
 				ft_philo_printf(arg, i, "died");
 				arg->die = 1;

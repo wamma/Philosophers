@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:13:15 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/21 20:24:04 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:44:27 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	ft_mutex_init(t_arg *arg)
 
 	if (pthread_mutex_init(&(arg->print), NULL))
 		return (1);
-	arg->forks = malloc(sizeof(pthread_mutex_t) \
-	* arg->philo_num);
+	arg->forks = malloc(sizeof(pthread_mutex_t) * arg->philo_num);
 	if (!(arg->forks))
 		return (1);
 	i = 0;
@@ -42,12 +41,12 @@ int	ft_philo_init(t_arg *arg)
 		return (1);
 	while (i < arg->philo_num)
 	{
-		arg->philo[i].arg = arg;
-		arg->philo[i].id = i + 1;
+		arg->philo[i].id = i;
 		arg->philo[i].left_fork = i;
 		arg->philo[i].right_fork = (i + 1) % arg->philo_num;
 		arg->philo[i].eat_cnt = 0;
-		arg->philo[i].check_death_time = 0;
+		arg->philo[i].last_eat_time = 0;
+		arg->philo[i].arg = arg;
 		i++;
 	}
 	return (0);
@@ -62,7 +61,7 @@ int	ft_arg_init(t_arg *arg, int argc, char **argv)
 	arg->die = 0;
 	arg->must_eat_num = 0;
 	arg->start_time = 0;
-	if (arg->philo_num <= 0 || arg->time_to_die <= 0 || \
+	if (arg->philo_num < 2 || arg->time_to_die <= 0 || \
 	arg->time_to_eat <= 0 || arg->time_to_sleep <= 0)
 		return (1);
 	if (argc == 6)
