@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/24 21:50:01 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/25 21:37:13 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# define TAKE_FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIE "is died"
 
 typedef struct s_philo
 {
@@ -59,11 +65,12 @@ int			ft_error(char *err);
 void		ft_free_thread(t_arg *arg);
 
 /*philo.c*/
-void		ft_philo_eat(t_arg *arg, t_philo *philo);
-int			ft_philo_printf(t_arg *arg, int id, char *message);
 int			ft_philo_do(t_arg *arg, t_philo *philo);
 void		*ft_pthread(void *philo_cp);
 int			ft_start_philo(t_arg *arg, t_philo *philo);
+
+/*print.c*/
+void		ft_philo_printf(t_arg *arg, int id, char *message);
 
 /*time.c*/
 long long	ft_time(void);
