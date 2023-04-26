@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/25 21:37:13 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:44:33 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_philo
 	int				left_fork;
 	int				right_fork;
 	int				eat_cnt;
-	int				last_eat_time;
+	long long		last_eat_time;
 	pthread_t		thread_id;
 	struct s_arg	*arg;
 }	t_philo;
@@ -54,7 +54,7 @@ typedef struct s_arg
 }	t_arg;
 
 /*philo_check.c*/
-int			ft_death_check(t_arg *arg, t_philo *philo);
+void		ft_death_check(t_arg *arg, t_philo *philo);
 /*philo_init.c*/
 int			ft_mutex_init(t_arg *arg);
 int			ft_philo_init(t_arg *arg);

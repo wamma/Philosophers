@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:43:50 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/25 21:41:51 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:30:33 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	*ft_pthread(void *philo)
 	arg = philo_cp->arg;
 	if (philo_cp->id % 2)
 		usleep(10000);
-	while (!arg->die)
+	while (!(arg->die))
 	{
-		if (ft_philo_do(arg, philo))
+		if (ft_philo_do(arg, philo_cp))
 			break ;
 		ft_philo_printf(arg, philo_cp->id, SLEEP);
 		ft_time_taken(arg, (long long)arg->time_to_sleep);
@@ -69,6 +69,7 @@ void	ft_free_philo(t_arg *arg, t_philo *philo)
 	free(arg->philo);
 	free(arg->forks);
 	pthread_mutex_destroy(&(arg->print));
+	pthread_mutex_destroy(&(arg->eat));
 }
 
 int	ft_start_philo(t_arg *arg, t_philo *philo)
@@ -81,7 +82,7 @@ int	ft_start_philo(t_arg *arg, t_philo *philo)
 	{
 		philo[i].last_eat_time = ft_time();
 		if (pthread_create(&(philo[i].thread_id), NULL, \
-		ft_pthread, &(philo[i])))
+		ft_pthread, (void *)&(philo[i])))
 			return (-1);
 		i++;
 	}

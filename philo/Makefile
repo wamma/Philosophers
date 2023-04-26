@@ -6,14 +6,14 @@
 #    By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 19:26:01 by hyungjup          #+#    #+#              #
-#    Updated: 2023/04/25 21:33:09 by hyungjup         ###   ########.fr        #
+#    Updated: 2023/04/26 15:49:54 by hyungjup         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -fsanitize=undefined
+CFLAG = -Wall -Wextra -Werror #-fsanitize=thread
 
 MAN_SRCS_DIR =	./srcs
 
