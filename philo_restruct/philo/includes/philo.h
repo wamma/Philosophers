@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/26 19:15:11 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/26 21:23:59 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,50 +31,55 @@ typedef struct s_philo
 	int				left_fork;
 	int				right_fork;
 	int				eat_cnt;
+	pthread_mutex_t	eat_cnt_mutex;
 	long long		last_eat_time;
-	pthread_t		thread_id;
-	struct s_arg	*arg;
+	pthread_mutex_t	last_eat_time_mutex;
+	struct s_info	*info;
 }	t_philo;
 
-typedef struct s_arg
+typedef struct s_info
 {
 	int				philo_num;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				must_eat_num;
+	int				must_eat;
+	int				must_eat_flag;
 	long long		start_time;
-	int				die;
-	int				eat_check;
-	int				finish_eat;
+	int				finish_flag;
+	int				finish_flag;
+	int				*fork;
+	pthread_mutex_t	*fork_mutex;
+	pthread_t		*thread;
+	pthread_mutex_t	mutex_start;
+	pthread_mutex_t	mutex_finish;
 	pthread_mutex_t	print;
 	pthread_mutex_t	eat;
-	pthread_mutex_t	*forks;
 	t_philo			*philo;
-}	t_arg;
+}	t_info;
 
 /*philo_check.c*/
-void		ft_death_check(t_arg *arg, t_philo *philo);
+void		ft_death_check(t_info *arg, t_philo *philo);
 /*philo_init.c*/
-int			ft_mutex_init(t_arg *arg);
-int			ft_philo_init(t_arg *arg);
-int			ft_arg_init(t_arg *arg, int ac, char **av);
+int			ft_mutex_init(t_info *arg);
+int			ft_philo_init(t_info *arg);
+int			ft_info_init(t_info *arg, int ac, char **av);
 
 /*philo_utils.c*/
 int			ft_error(char *err);
-void		ft_free_thread(t_arg *arg);
+void		ft_free_thread(t_info *arg);
 
 /*philo.c*/
-int			ft_philo_do(t_arg *arg, t_philo *philo);
+int			ft_philo_do(t_info *arg, t_philo *philo);
 void		*ft_pthread(void *philo_cp);
-int			ft_start_philo(t_arg *arg, t_philo *philo);
+int			ft_start_philo(t_info *arg, t_philo *philo);
 
 /*print.c*/
-void		ft_philo_printf(t_arg *arg, int id, char *message);
+void		ft_philo_printf(t_info *arg, int id, char *message);
 
 /*time.c*/
 long long	ft_time(void);
-void		ft_time_taken(t_arg *arg, long long wait_time);
+void		ft_time_taken(t_info *arg, long long wait_time);
 
 /*ft_atoi.c*/
 int			ft_atoi(char *str);
