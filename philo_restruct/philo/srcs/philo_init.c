@@ -6,13 +6,13 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:13:15 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/26 21:29:10 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:55:51 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ft_fork_init(t_info *info)
+static int	ft_fork_init(t_info *info)
 {
 	int	i;
 
@@ -31,7 +31,7 @@ int	ft_fork_init(t_info *info)
 	return (0);
 }
 
-int	ft_fork_mutex_init(t_info *info)
+static int	ft_fork_mutex_init(t_info *info)
 {
 	int	i;
 
@@ -42,8 +42,8 @@ int	ft_fork_mutex_init(t_info *info)
 		free(info->fork);
 		return (-1);
 	}
-	i = -1;
-	while (++i < info->philo_num)
+	i = 0;
+	while (i < info->philo_num)
 	{
 		if (pthread_mutex_init(&(info->fork_mutex[i]), NULL))
 		{
@@ -51,6 +51,18 @@ int	ft_fork_mutex_init(t_info *info)
 			free_fork(info);
 			return (-1);
 		}
+		i++;
+	}
+	return (0);
+}
+
+static int	ft_print_init(t_info *info)
+{
+	if (pthread_mutex_init(&(info->print), NULL))
+	{
+		free_philo(info);
+		free_fork(info);
+		return (-1);
 	}
 	return (0);
 }
@@ -88,7 +100,6 @@ int	ft_info_init(t_info *info, int argc, char **argv)
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
 	info->must_eat_flag = 0;
-	info->start_time = 0;
 	info->finish_flag = 0;
 	if (info->philo_num <= 0 || info->time_to_die <= 0 || \
 	info->time_to_eat < 0 || info->time_to_sleep < 0)
@@ -97,8 +108,6 @@ int	ft_info_init(t_info *info, int argc, char **argv)
 	{
 		info->must_eat_flag = 1;
 		info->must_eat = ft_atoi(argv[5]);
-		if (info->must_eat <= 0)
-			return (-1);
 	}
 	if (ft_philo_init(info))
 		return (-1);
@@ -107,6 +116,8 @@ int	ft_info_init(t_info *info, int argc, char **argv)
 	if (ft_fork_mutex_init(info))
 		return (-1);
 	if (ft_mutex_init(info))
+		return (-1);
+	if (ft_print_init(info))
 		return (-1);
 	return (0);
 }

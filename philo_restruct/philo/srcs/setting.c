@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   setting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 16:47:56 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/27 20:39:56 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/04/27 10:57:31 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/04/27 10:59:43 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
-void	ft_philo_printf(t_arg *arg, int id, char *message)
+int	ft_setting_mutex(t_info *info)
 {
-	long long	current_time;
-
-	pthread_mutex_lock(&(arg->print));
-	current_time = ft_time();
-	pthread_mutex_lock(&(arg->die_mutex));
-	if (!(arg->die))
-		printf("%lld %d %s\n", current_time - arg->start_time, id + 1, message);
-	pthread_mutex_unlock(&(arg->die_mutex));
-	pthread_mutex_unlock(&(arg->print));
-	return ;
+	if (pthread_mutex_init(&(info->mutex_start), NULL))
+		return (-1);
+	if (pthread_mutex_init(&(info->mutex_finish), NULL))
+	{
+		pthread_mutex_destroy(&(info->mutex_start), NULL);
+		return (-1);
+	}
+	return (0);
 }

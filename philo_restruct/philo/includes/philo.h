@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/26 21:23:59 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:22:22 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ typedef struct s_info
 	int				time_to_sleep;
 	int				must_eat;
 	int				must_eat_flag;
-	long long		start_time;
-	int				finish_flag;
 	int				finish_flag;
 	int				*fork;
 	pthread_mutex_t	*fork_mutex;
@@ -75,7 +73,7 @@ void		*ft_pthread(void *philo_cp);
 int			ft_start_philo(t_info *arg, t_philo *philo);
 
 /*print.c*/
-void		ft_philo_printf(t_info *arg, int id, char *message);
+void		ft_philo_printf(t_info *info, int id, char *message);
 
 /*time.c*/
 long long	ft_time(void);
@@ -83,5 +81,12 @@ void		ft_time_taken(t_info *arg, long long wait_time);
 
 /*ft_atoi.c*/
 int			ft_atoi(char *str);
+
+/*free.c*/
+int			free_philo(t_info *info);
+void		free_fork(t_info *info);
+
+/*setting.c*/
+int			ft_setting_mutex(t_info *info);
 
 #endif

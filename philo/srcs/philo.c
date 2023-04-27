@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:43:50 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/26 19:23:00 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:59:07 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,35 @@
 
 void	ft_philo_eat(t_arg *arg, t_philo *philo)
 {
-	pthread_mutex_lock(&(arg->eat));
 	ft_philo_printf(arg, philo->id, EAT);
+	pthread_mutex_lock(&(arg->eat));
 	philo->last_eat_time = ft_time();
-	pthread_mutex_unlock(&(arg->eat));
 	(philo->eat_cnt)++;
-	ft_time_taken(arg, (long long)arg->time_to_eat);
+	pthread_mutex_unlock(&(arg->eat));
+	ft_time_taken((long long)arg->time_to_eat);
 }
 
 int	ft_philo_do(t_arg *arg, t_philo *philo)
 {
 	pthread_mutex_lock(&(arg->forks[philo->left_fork]));
 	ft_philo_printf(arg, philo->id, TAKE_FORK);
+	if (arg->philo_num == 1)
+	{
+		ft_time_taken((long long)arg->time_to_die);
+		return (0);
+	}
 	pthread_mutex_lock(&(arg->forks[philo->right_fork]));
 	ft_philo_printf(arg, philo->id, TAKE_FORK);
 	ft_philo_eat(philo->arg, philo);
 	pthread_mutex_unlock(&(arg->forks[philo->left_fork]));
 	pthread_mutex_unlock(&(arg->forks[philo->right_fork]));
+	pthread_mutex_lock(&(arg->eat));
 	if (arg->eat_check)
+	{
+		pthread_mutex_unlock(&(arg->eat));
 		return (-1);
+	}
+	pthread_mutex_unlock(&(arg->eat));
 	return (0);
 }
 
@@ -44,15 +54,20 @@ void	*ft_pthread(void *philo)
 	philo_cp = (t_philo *)philo;
 	arg = philo_cp->arg;
 	if (philo_cp->id % 2)
-		usleep(10000);
+		usleep(arg->time_to_eat * 1000);
+	pthread_mutex_lock(&(arg->die_mutex));
 	while (!(arg->die))
 	{
+		pthread_mutex_unlock(&(arg->die_mutex));
 		if (ft_philo_do(arg, philo_cp))
 			break ;
 		ft_philo_printf(arg, philo_cp->id, SLEEP);
-		ft_time_taken(arg, (long long)arg->time_to_sleep);
+		ft_time_taken((long long)arg->time_to_sleep);
 		ft_philo_printf(arg, philo_cp->id, THINK);
+		usleep(100);
+		pthread_mutex_lock(&(arg->die_mutex));
 	}
+	pthread_mutex_unlock(&(arg->die_mutex));
 	return (0);
 }
 

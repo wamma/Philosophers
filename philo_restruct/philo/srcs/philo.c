@@ -6,13 +6,13 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:43:50 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/26 19:23:00 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/27 11:03:43 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	ft_philo_eat(t_arg *arg, t_philo *philo)
+void	ft_philo_eat(t_info *arg, t_philo *philo)
 {
 	pthread_mutex_lock(&(arg->eat));
 	ft_philo_printf(arg, philo->id, EAT);
@@ -22,7 +22,7 @@ void	ft_philo_eat(t_arg *arg, t_philo *philo)
 	ft_time_taken(arg, (long long)arg->time_to_eat);
 }
 
-int	ft_philo_do(t_arg *arg, t_philo *philo)
+int	ft_philo_do(t_info *arg, t_philo *philo)
 {
 	pthread_mutex_lock(&(arg->forks[philo->left_fork]));
 	ft_philo_printf(arg, philo->id, TAKE_FORK);
@@ -38,7 +38,7 @@ int	ft_philo_do(t_arg *arg, t_philo *philo)
 
 void	*ft_pthread(void *philo)
 {
-	t_arg	*arg;
+	t_info	*arg;
 	t_philo	*philo_cp;
 
 	philo_cp = (t_philo *)philo;
@@ -56,7 +56,7 @@ void	*ft_pthread(void *philo)
 	return (0);
 }
 
-void	ft_free_philo(t_arg *arg, t_philo *philo)
+void	ft_free_philo(t_info *arg, t_philo *philo)
 {
 	int	i;
 
@@ -72,21 +72,16 @@ void	ft_free_philo(t_arg *arg, t_philo *philo)
 	pthread_mutex_destroy(&(arg->eat));
 }
 
-int	ft_start_philo(t_arg *arg, t_philo *philo)
+int	ft_start_philo(t_info *info)
 {
 	int		i;
+	void	*routine;
 
+	info->thread = malloc(sizeof(pthread_t) * info->philo_num);
+	if (!(info->thread))
+		return (-1);
+	routine = routine;
 	i = 0;
-	arg->start_time = ft_time();
-	while (i < arg->philo_num)
-	{
-		philo[i].last_eat_time = ft_time();
-		if (pthread_create(&(philo[i].thread_id), NULL, \
-		ft_pthread, (void *)&(philo[i])))
-			return (-1);
-		i++;
-	}
-	ft_death_check(arg, arg->philo);
-	ft_free_philo(arg, arg->philo);
+	
 	return (0);
 }

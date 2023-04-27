@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 19:43:44 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/26 19:22:56 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:39:58 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,4 @@ void	swap_fork(t_philo *philo)
 	tmp = philo->left_fork;
 	philo->left_fork = philo->right_fork;
 	philo->right_fork = tmp;
-}
-
-int	ft_monitoring(t_arg *arg, t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < arg->philo_num)
-	{
-		
-	}
 }

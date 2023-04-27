@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/26 19:15:11 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:39:58 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define EAT "is eating"
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
-# define DIE "is died"
+# define DIE "died"
 
 typedef struct s_philo
 {
@@ -49,6 +49,7 @@ typedef struct s_arg
 	int				finish_eat;
 	pthread_mutex_t	print;
 	pthread_mutex_t	eat;
+	pthread_mutex_t	die_mutex;
 	pthread_mutex_t	*forks;
 	t_philo			*philo;
 }	t_arg;
@@ -74,7 +75,7 @@ void		ft_philo_printf(t_arg *arg, int id, char *message);
 
 /*time.c*/
 long long	ft_time(void);
-void		ft_time_taken(t_arg *arg, long long wait_time);
+void		ft_time_taken(long long wait_time);
 
 /*ft_atoi.c*/
 int			ft_atoi(char *str);
