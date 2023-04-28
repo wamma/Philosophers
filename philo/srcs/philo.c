@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:43:50 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/27 20:59:07 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:59:35 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_free_philo(t_arg *arg, t_philo *philo)
 
 int	ft_start_philo(t_arg *arg, t_philo *philo)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	arg->start_time = ft_time();

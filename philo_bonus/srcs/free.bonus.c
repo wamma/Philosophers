@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 19:57:23 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/27 11:01:07 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/04/28 21:08:23 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/04/28 21:09:17 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../includes/philo_bonus.h"
 
-int	main(int argc, char **argv)
+void	kill_process(t_info *info)
 {
-	t_info	info;
+	int	i;
 
-	if (argc != 5 && argc != 6)
-		return (ft_error("Error: argument"));
-	if (ft_info_init(&info, argc, argv))
-		return (ft_error("Error: input_info"));
-	if (ft_setting_mutex(&info))
-		return (ft_error("Error: setting_mutex"));
-	if (ft_start_philo(&info))
-		return (ft_error("Error: start_philo"));
-	return (0);
+	i = 0;
+	while (i < info->philo_num)
+	{
+		if (info->philo[i].pid > 0)
+	}
 }

@@ -1,31 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   philo_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 19:43:44 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/28 15:08:44 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/04/28 15:06:09 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/04/28 17:07:22 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../includes/philo_bonus.h"
 
 int	ft_error(char *err)
 {
-	printf("%s\n", err);
+	prinf("%s\n", err);
 	return (-1);
 }
 
-void	ft_free_thread(t_arg *arg)
+static int	ft_isspace(char c)
 {
-	int	i;
+	return ((c >= 9 && c <= 13) || c == 32);
+}
 
-	i = 0;
-	while (i < arg->philo_num)
-		pthread_mutex_destroy(&(arg->forks[i++]));
-	free(arg->forks);
-	free(arg->philo);
-	pthread_mutex_destroy(&(arg->print));
+int	ft_atoi(char *str)
+{
+	int	result;
+	int	sign;
+
+	result = 0;
+	sign = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign *= -1;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = (result * 10) + (*str - '0');
+		str++;
+	}
+	return (result * sign);
 }

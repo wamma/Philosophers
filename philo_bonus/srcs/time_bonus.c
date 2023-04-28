@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   time_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 17:10:16 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/21 19:39:53 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/04/28 17:00:17 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/04/28 17:00:27 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../includes/philo_bonus.h"
 
-static int	ft_isspace(char c)
+long long	ft_time(void)
 {
-	return ((c >= 9 && c <= 13) || c == 32);
+	struct timeval	time;
+	long long		ms;
+
+	gettimeofday(&time, NULL);
+	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (ms);
 }
 
-int	ft_atoi(char *str)
+void	ft_time_taken(long long wait_time)
 {
-	int	result;
-	int	sign;
+	long long	start_time;
+	long long	current_time;
 
-	result = 0;
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '+' || *str == '-')
+	start_time = ft_time();
+	while (1)
 	{
-		if (*str == '-')
-			sign *= -1;
+		current_time = ft_time();
+		if ((current_time - start_time) >= wait_time)
+			break ;
+		usleep(100);
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = (result * 10) + (*str - '0');
-		str++;
-	}
-	return (result * sign);
 }

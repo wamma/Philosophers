@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:58:52 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/27 20:39:58 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:16:16 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_arg
 	long long		start_time;
 	int				die;
 	int				eat_check;
-	int				finish_eat;
 	pthread_mutex_t	print;
 	pthread_mutex_t	eat;
 	pthread_mutex_t	die_mutex;
