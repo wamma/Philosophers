@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   info_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
+/*   By: heongjunpark <heongjunpark@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 19:34:24 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/28 21:08:08 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/04/30 22:02:05 by heongjunpar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ int	info_start(t_info *info, t_philo *philo)
 		return (-1);
 	sem_wait(info->sem_finish);
 	kill_process(info);
+	info->die = DIE;
+	i = 0;
+	while (i < info->philo_num)
+	{
+		sem_post(info->sem_full);
+		i++;
+	}
+	pthread_join(info->philo->thread_id, NULL);
+	free_info();
+	return (0);
 }
