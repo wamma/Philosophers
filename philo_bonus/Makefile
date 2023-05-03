@@ -6,11 +6,11 @@
 #    By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 19:26:01 by hyungjup          #+#    #+#              #
-#    Updated: 2023/04/27 21:00:14 by hyungjup         ###   ########.fr        #
+#    Updated: 2023/05/03 22:09:03 by hyungjup         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = philo_bonus
 
 CC = cc
 CFLAG = -Wall -Wextra -Werror #-fsanitize=thread

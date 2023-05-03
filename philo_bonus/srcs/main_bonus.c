@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:05 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/28 19:36:55 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:11:41 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	ft_philo_generate(t_info *info)
 
 	sem_wait(info->sem_start);
 	i = 0;
+	info->start_time = ft_time();
 	while (i < info->philo_num)
 	{
 		info->philo[i].pid = fork();
@@ -25,7 +26,8 @@ static int	ft_philo_generate(t_info *info)
 			break ;
 		if (info->philo[i].pid == 0)
 		{
-			routine(info, i);
+			if (routine(info, i))
+				return (-1);
 			return (0);
 		}
 		i++;
@@ -43,11 +45,8 @@ int	main(int argc, char **argv)
 	if (ft_info_init(&info, argc, argv))
 		return (ft_error("Error: info error"));
 	if (ft_philo_generate(&info))
-	{
-		sem_wait(info.print);
-		ft_error("Error: philo generate");
-		sem_post(info.sem_finish);
-	}
-	info_start(&info, info.philo);
+		return (ft_error("Error: routine"));
+	if (info_start(&info, info.philo))
+		return (ft_error("Error: info start"));
 	return (0);
 }

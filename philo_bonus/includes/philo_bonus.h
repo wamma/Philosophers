@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:21 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/28 20:45:45 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:51:32 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,24 @@ typedef struct s_info
 	t_philo		*philo;
 }	t_info;
 
+/*free_bonus.c*/
+void		kill_process(t_info *info);
+void		free_info(void);
+
+/*info_bonus.c*/
+void		*ft_pthread(void *arg);
+int			info_start(t_info *info, t_philo *philo);
+
+/*philo_init_bonus.c*/
+int			ft_semaphore_init(t_info *info);
+int			ft_philo_init(t_info *info);
+int			ft_info_init(t_info *info, int argc, char **argv);
+
 /*philo_utils_bonus.c*/
 int			ft_error(char *err);
 int			ft_atoi(char *str);
 
-/*info_bonus.c*/
-int			info_start(t_info *info, t_philo *philo);
+/**/
 
 /*time.c*/
 long long	ft_time(void);

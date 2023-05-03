@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   philo_check_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 21:32:35 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/02 17:27:00 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/05/02 17:15:35 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/05/03 15:48:52 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../includes/philo_bonus.h"
 
-long long	ft_time(void)
+int	ft_death_check(t_info *info, t_philo *philo)
 {
-	struct timeval	time;
-	long long		ms;
-
-	gettimeofday(&time, NULL);
-	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
-	return (ms);
-}
-
-void	ft_time_taken(long long wait_time)
-{
-	long long	start_time;
+	long long	gap_time;
 	long long	current_time;
 
-	start_time = ft_time();
-	while (1)
-	{
-		current_time = ft_time();
-		if ((current_time - start_time) >= wait_time)
-			break ;
-		usleep(100);
-	}
+	sem_wait(philo->sem_last_eat_time);
+	current_time = ft_time();
+	gap_time = 
 }

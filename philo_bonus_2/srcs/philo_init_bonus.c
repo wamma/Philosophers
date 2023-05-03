@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_init.c                                       :+:      :+:    :+:   */
+/*   philo_init_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 19:13:15 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/03 19:46:28 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/05/03 16:10:52 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/05/03 20:19:20 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../includes/philo_bonus.h"
 
-int	ft_mutex_init(t_arg *arg)
+void	ft_sem_init(t_arg *arg)
 {
-	int	i;
-
-	if (pthread_mutex_init(&(arg->print), NULL))
-		return (-1);
-	if (pthread_mutex_init(&(arg->eat), NULL))
-		return (-1);
-	if (pthread_mutex_init(&(arg->die_mutex), NULL))
-		return (-1);
-	arg->forks = malloc(sizeof(pthread_mutex_t) * arg->philo_num);
-	if (!(arg->forks))
-		return (-1);
-	i = 0;
-	while (i < arg->philo_num)
-	{
-		if (pthread_mutex_init(&(arg->forks[i]), NULL))
-			return (-1);
-		i++;
-	}
-	return (0);
+	sem_unlink("print");
+	arg->print = sem_open("print", O_CREAT, 0644, 1);
+	sem_unlink("forks");
+	arg->forks = sem_open("forks", O_CREAT, 0644, arg->philo_num);
+	sem_unlink("eat");
+	arg->eat = sem_open("eat", O_CREAT, 0644, 1);
+	sem_unlink("sem_die");
+	arg->sem_die = sem_open("sem_die", O_CREAT, 0644, 1);
+	sem_unlink("flag");
+	arg->flag = sem_open("flag", O_CREAT, 0644, 1);
 }
 
 int	ft_philo_init(t_arg *arg)
@@ -40,7 +31,7 @@ int	ft_philo_init(t_arg *arg)
 	int	i;
 
 	i = 0;
-	arg->philo = malloc(sizeof(t_arg) * arg->philo_num);
+	arg->philo = malloc(sizeof(sem_t) * arg->philo_num);
 	if (!(arg->philo))
 		return (-1);
 	while (i < arg->philo_num)
@@ -64,7 +55,7 @@ int	ft_arg_init(t_arg *arg, int argc, char **argv)
 	arg->time_to_sleep = ft_atoi(argv[4]);
 	arg->die = 0;
 	arg->must_eat_num = 0;
-	arg->start_time = 0;
+	arg->start_time = ft_time();
 	arg->eat_check = 0;
 	if (arg->philo_num <= 0 || arg->time_to_die <= 0 || \
 	arg->time_to_eat <= 0 || arg->time_to_sleep <= 0)
@@ -75,8 +66,7 @@ int	ft_arg_init(t_arg *arg, int argc, char **argv)
 		if (arg->must_eat_num <= 0)
 			return (-1);
 	}
-	if (ft_mutex_init(arg))
-		return (-1);
+	ft_sem_init(arg);
 	if (ft_philo_init(arg))
 		return (-1);
 	return (0);

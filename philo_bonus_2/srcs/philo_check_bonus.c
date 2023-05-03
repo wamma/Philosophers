@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_check.c                                      :+:      :+:    :+:   */
+/*   philo_check_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 19:20:20 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/02 20:53:53 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/05/03 16:10:46 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/05/03 22:15:32 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../includes/philo_bonus.h"
 
 static void	ft_eat_check(t_arg *arg, t_philo *philo)
 {
 	int	i;
 
+	// sem_wait(arg->eat);
 	i = 0;
-	pthread_mutex_lock(&(arg->eat));
 	while (arg->must_eat_num != 0 && i < arg->philo_num \
 	&& philo[i].eat_cnt > arg->must_eat_num)
 	{
-		pthread_mutex_unlock(&(arg->eat));
+		// sem_post(arg->eat);
 		i++;
-		pthread_mutex_lock(&(arg->eat));
+		// sem_wait(arg->eat);
 	}
-	pthread_mutex_unlock(&(arg->eat));
-	pthread_mutex_lock(&(arg->eat));
+	// sem_post(arg->eat);
+	// sem_wait(arg->eat);
 	if (i == arg->philo_num)
 		arg->eat_check = 1;
-	pthread_mutex_unlock(&(arg->eat));
+	// sem_wait(arg->eat);
 }
 
 void	ft_death_check(t_arg *arg, t_philo *philo)
@@ -44,17 +44,17 @@ void	ft_death_check(t_arg *arg, t_philo *philo)
 		while ((++i < arg->philo_num))
 		{
 			current_time = ft_time();
-			pthread_mutex_lock(&(arg->eat));
+			sem_wait(arg->eat);
 			if ((current_time - philo[i].last_eat_time) >= arg->time_to_die)
 			{
-				pthread_mutex_unlock(&(arg->eat));
+				sem_post(arg->eat);
 				ft_philo_printf(arg, i, DIE);
-				pthread_mutex_lock(&(arg->die_mutex));
+				sem_wait(arg->sem_die);
 				arg->die = 1;
-				pthread_mutex_unlock(&(arg->die_mutex));
+				sem_post(arg->sem_die);
 				return ;
 			}
-			pthread_mutex_unlock(&(arg->eat));
+			sem_post(arg->eat);
 		}
 		ft_eat_check(arg, arg->philo);
 	}

@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   philo_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 17:10:16 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/02 20:57:41 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/05/03 16:10:56 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/05/03 17:01:01 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../includes/philo_bonus.h"
+
+int	ft_error(char *err)
+{
+	printf("%s\n", err);
+	return (-1);
+}
+
+// void	ft_free_thread(t_arg *arg)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < arg->philo_num)
+// 		sem_unlink(&(arg->forks[i++]));
+// 	sem_unlink("sem_start");
+// }
 
 static int	ft_isspace(char c)
 {
