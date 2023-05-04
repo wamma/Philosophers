@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:12:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/28 20:46:10 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:39:41 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,17 @@ int	ft_semaphore_init(t_info *info)
 	info->sem_full = sem_open("sem_full", O_CREAT, 0644, 0);
 }
 
-int	ft_philo_init(t_info *info)
+int	ft_philo_init(t_info *info, t_philo *philo, int i)
 {
-	int	i;
-
-	info->philo = malloc(sizeof(t_philo) * info->philo_num);
-	if (!(info->philo))
-		return (-1);
-	i = 0;
-	while (i < info->philo_num)
-	{
-		info->philo[i].id = i;
-		info->philo[i].last_eat_time = 0;
-		info->philo[i].eat_count = 0;
-		info->philo[i].info = info;
-		i++;
-	}
+	philo->id = i;
+	philo->last_eat_time = 0;
+	philo->eat_count = 0;
+	philo->info = info;
+	sem_unlink("sem_last_eat_time");
+	philo->sem_last_eat_time = sem_open("sem_last_eat_time", \
+	O_CREAT | O_EXCL, 0644, 1);
+	sem_unlink("sem_eat_count");
+	philo->sem_eat_count = sem_open("sem_eat_count", O_CREAT | O_EXCL, 0644, 1);
 	return (0);
 }
 
@@ -66,7 +61,5 @@ int	ft_info_init(t_info *info, int argc, char **argv)
 			return (-1);
 	}
 	if (ft_semaphore_init(info))
-		return (-1);
-	if (ft_philo_init(info))
 		return (-1);
 }

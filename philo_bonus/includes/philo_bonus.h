@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:21 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/02 14:51:32 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:29:15 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@
 # include <semaphore.h>
 # include <signal.h>
 
-# define DIE 1
-# define FULL 2
-
 typedef struct s_philo
 {
 	pid_t			pid;
 	int				id;
-	int				eat_count;
 	long long		last_eat_time;
 	sem_t			*sem_last_eat_time;
-	pthread_t		thread_id;
+	int				eat_count;
+	sem_t			*sem_eat_count;
 	struct s_info	*info;
 }	t_philo;
 
@@ -64,7 +61,7 @@ int			info_start(t_info *info, t_philo *philo);
 
 /*philo_init_bonus.c*/
 int			ft_semaphore_init(t_info *info);
-int			ft_philo_init(t_info *info);
+int			ft_philo_init(t_info *info, t_philo *philo, int i);
 int			ft_info_init(t_info *info, int argc, char **argv);
 
 /*philo_utils_bonus.c*/
