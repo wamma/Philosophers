@@ -6,13 +6,13 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:12:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/04 15:39:41 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:15:16 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo_bonus.h"
 
-int	ft_semaphore_init(t_info *info)
+void	ft_semaphore_init(t_info *info)
 {
 	sem_unlink("sem_start");
 	info->sem_start = sem_open("sem_start", O_CREAT, 0644, 1);
@@ -37,6 +37,7 @@ int	ft_philo_init(t_info *info, t_philo *philo, int i)
 	O_CREAT | O_EXCL, 0644, 1);
 	sem_unlink("sem_eat_count");
 	philo->sem_eat_count = sem_open("sem_eat_count", O_CREAT | O_EXCL, 0644, 1);
+	sem_unlink("sem_eat_count");
 	return (0);
 }
 
@@ -46,11 +47,10 @@ int	ft_info_init(t_info *info, int argc, char **argv)
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
-	info->die = 0;
 	info->must_eat = 0;
 	info->must_eat_flag = 0;
 	info->eat_check = 0;
-	info->start_time = ft_time();
+	info->die = 0;
 	if (info->philo_num <= 0 || info->time_to_die <= 0 || \
 	info->time_to_eat <= 0 || info->time_to_sleep <= 0)
 		return (-1);
@@ -60,6 +60,9 @@ int	ft_info_init(t_info *info, int argc, char **argv)
 		if (info->must_eat <= 0)
 			return (-1);
 	}
-	if (ft_semaphore_init(info))
+	info->philo = malloc(sizeof(t_philo) * info->philo_num);
+	if (!(info->philo))
 		return (-1);
+	ft_semaphore_init(info);
+	return (0);
 }

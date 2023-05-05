@@ -6,14 +6,14 @@
 #    By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 19:26:01 by hyungjup          #+#    #+#              #
-#    Updated: 2023/05/03 22:09:03 by hyungjup         ###   ########.fr        #
+#    Updated: 2023/05/05 17:33:34 by hyungjup         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo_bonus
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror #-fsanitize=thread
+CFLAG = -Wall -Wextra -Werror -g#-fsanitize=thread
 
 MAN_SRCS_DIR =	./srcs
 
@@ -21,14 +21,15 @@ MAN_OBJS_DIR = ./objs
 
 MAN_INC_DIR = ./includes
 
-SRCS = ./srcs/ft_atoi.c \
-	   ./srcs/main.c \
-	   ./srcs/philo_check.c \
-	   ./srcs/philo_init.c \
-	   ./srcs/philo_utils.c \
-	   ./srcs/philo.c \
-	   ./srcs/time.c \
-	   ./srcs/print.c
+SRCS = ./srcs/death_check_bonus.c \
+	   ./srcs/free_bonus.c \
+	   ./srcs/info_bonus.c \
+	   ./srcs/main_bonus.c \
+	   ./srcs/philo_init_bonus.c \
+	   ./srcs/philo_utils_bonus.c \
+	   ./srcs/print_bonus.c \
+	   ./srcs/routine_bonus.c \
+	   ./srcs/time_bonus.c \
 
 OBJS = $(addprefix $(MAN_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 

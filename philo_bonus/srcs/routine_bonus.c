@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 17:08:04 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/04 20:39:28 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/05 19:59:59 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ static void	ft_take_fork(t_philo *philo)
 
 static void	ft_eat(t_philo *philo)
 {
-	long long	current_time;
-
 	sem_wait(philo->sem_last_eat_time);
-	current_time = ft_time();
-	philo->last_eat_time = current_time - philo->info->start_time;
+	philo->last_eat_time = ft_time();
 	sem_post(philo->sem_last_eat_time);
 	ft_philo_printf(philo, "is eating");
 	ft_time_taken((long long)philo->info->time_to_eat);
@@ -48,43 +45,13 @@ static void	ft_sleep(t_philo *philo)
 	ft_time_taken((long long)philo->info->time_to_sleep);
 }
 
-void	*ft_philo_monitor(void *arg)
-{
-	t_philo	*philo;
-	int		dup_flag;
-
-	philo = arg;
-	dup_flag = 0;
-	while (1)
-	{
-		if (ft_death_check(philo))
-		{
-			ft_philo_printf(arg, philo->id, "died");
-			philo->info->die = 1;
-			sem_post(philo->info->sem_finish);
-		}
-		if (!dup_flag && philo->info->must_eat_flag)
-		{
-			sem_wait(philo->eat_count);
-			if (philo->eat_count >= philo->info->must_eat)
-			{
-				sem_post(philo->info->sem_full);
-				dup_flag = 1;
-			}
-			sem_post(philo->eat_count);
-		}
-	}
-	return (0);
-}
-
-void	routine(t_info *info, int i)
+int	routine(t_info *info, int i)
 {
 	pthread_t	sub_info;
 
-	ft_philo_init(info, info->philo, i);
-	sem_wait(info->sem_start);
-	sem_post(info->sem_start);
-	if (pthread_create(sub_info, NULL, ft_philo_monitor, &(info->philo[i])))
+	ft_philo_init(info, &(info->philo[i]), i);
+	if (pthread_create(&sub_info, NULL, ft_philo_monitor, \
+	&(info->philo[i])) != 0)
 		return (-1);
 	if (info->philo[i].id % 2 == 1)
 		usleep(info->time_to_eat * 1000);

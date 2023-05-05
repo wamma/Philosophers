@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:06:09 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/04/28 17:07:22 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/05 18:52:34 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_error(char *err)
 {
-	prinf("%s\n", err);
+	printf("%s\n", err);
 	return (-1);
 }
 
@@ -35,7 +35,10 @@ int	ft_atoi(char *str)
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
+		{
 			sign *= -1;
+			str++;
+		}
 	}
 	while (*str >= '0' && *str <= '9')
 	{
