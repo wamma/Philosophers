@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:12:34 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/05 21:15:16 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/09 23:05:09 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	ft_philo_init(t_info *info, t_philo *philo, int i)
 	O_CREAT | O_EXCL, 0644, 1);
 	sem_unlink("sem_eat_count");
 	philo->sem_eat_count = sem_open("sem_eat_count", O_CREAT | O_EXCL, 0644, 1);
-	sem_unlink("sem_eat_count");
 	return (0);
 }
 
@@ -47,7 +46,7 @@ int	ft_info_init(t_info *info, int argc, char **argv)
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
-	info->must_eat = 0;
+	info->must_eat = 0; \
 	info->must_eat_flag = 0;
 	info->eat_check = 0;
 	info->die = 0;
