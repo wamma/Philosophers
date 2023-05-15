@@ -6,14 +6,14 @@
 #    By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 19:26:01 by hyungjup          #+#    #+#              #
-#    Updated: 2023/05/15 16:18:30 by hyungjup         ###   ########.fr        #
+#    Updated: 2023/05/15 22:06:59 by hyungjup         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo_bonus
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -g#-fsanitize=thread
+CFLAG = -Wall -Wextra -Werror #-fsanitize=thread
 
 MAN_SRCS_DIR =	./srcs
 
@@ -22,6 +22,11 @@ MAN_OBJS_DIR = ./objs
 MAN_INC_DIR = ./includes
 
 SRCS = ./srcs/main_bonus.c \
+	   ./srcs/ft_init_bonus.c \
+	   ./srcs/ft_philo_bonus.c \
+	   ./srcs/ft_print_bonus.c \
+	   ./srcs/ft_time_bonus.c \
+	   ./srcs/ft_utils_bonus.c \
 
 OBJS = $(addprefix $(MAN_OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 

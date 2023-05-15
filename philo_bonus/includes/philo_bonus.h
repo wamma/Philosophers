@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:21 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/15 17:35:08 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/15 22:06:35 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@
 # define YES 1
 # define NO 0
 # define FORK 1
-# define EATING 2
-# define SLEEPING 3
-# define THINKING 4
+# define EAT 2
+# define SLEEP 3
+# define THINK 4
 # define DIED 5
-# define DONE 6
 
 typedef struct s_philo
 {
@@ -52,10 +51,31 @@ typedef struct s_info
 	int				max_eat;
 	int				current_eat;
 	sem_t			*forks;
-	sem_t			*message;
+	sem_t			*print;
 	sem_t			*death;
 	sem_t			*stop;
 	t_philo			*philo;
 }	t_info;
+
+/*ft_init_bonus.c*/
+void		ft_semaphore_init(t_info *info);
+int			ft_philo_init(t_info *info);
+int			ft_info_init(int argc, char **argv, t_info *info);
+void		*ft_death_check(void *arg);
+void		ft_routine(t_philo *philo);
+void		ft_create_process(t_info *info, t_philo *philo);
+
+/*ft_print_bonus.c*/
+void		ft_printf(int status, t_philo *philo);
+
+/*ft_time.c*/
+long long	ft_time(void);
+
+/*ft_utils_bonus.c*/
+int			ft_error(char *err);
+int			ft_atoi(char *str);
+void		ft_take_fork(t_philo *philo);
+void		ft_eat(t_philo *philo);
+void		ft_sleep(t_philo *philo);
 
 #endif
