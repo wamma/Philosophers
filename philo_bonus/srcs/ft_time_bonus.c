@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_time_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/28 17:00:17 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/09 23:04:55 by hyungjup         ###   ########.fr       */
+/*   Created: 2023/05/15 17:54:08 by hyungjup          #+#    #+#             */
+/*   Updated: 2023/05/15 17:54:26 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,4 @@ long long	ft_time(void)
 	gettimeofday(&time, NULL);
 	ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
 	return (ms);
-}
-
-void	ft_time_taken(long long wait_time)
-{
-	long long	start_time;
-	long long	current_time;
-
-	start_time = ft_time();
-	while (1)
-	{
-		current_time = ft_time();
-		if ((current_time - start_time) >= wait_time)
-			break ;
-		usleep(100);
-	}
 }
