@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:20:20 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/02 20:53:53 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:18:17 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_eat_check(t_arg *arg, t_philo *philo)
 	i = 0;
 	pthread_mutex_lock(&(arg->eat));
 	while (arg->must_eat_num != 0 && i < arg->philo_num \
-	&& philo[i].eat_cnt > arg->must_eat_num)
+	&& philo[i].eat_cnt >= arg->must_eat_num)
 	{
 		pthread_mutex_unlock(&(arg->eat));
 		i++;

@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:21 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/15 22:06:35 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:48:46 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ long long	ft_time(void);
 /*ft_utils_bonus.c*/
 int			ft_error(char *err);
 int			ft_atoi(char *str);
+void		ft_destory_process(t_info *info, t_philo *philo);
+
+/*ft_routine_bonus.c*/
 void		ft_take_fork(t_philo *philo);
 void		ft_eat(t_philo *philo);
 void		ft_sleep(t_philo *philo);

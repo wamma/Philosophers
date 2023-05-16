@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:20:00 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/15 22:05:20 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/16 21:40:53 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_philo_init(t_info *info)
 		info->philo[i].dead = NO;
 		info->philo[i].pid = -1;
 		info->philo[i].eat_count = info->eat_count;
+		info->philo[i].info = info;
 		i++;
 	}
 	return (0);
@@ -49,7 +50,7 @@ int	ft_info_init(int argc, char **argv, t_info *info)
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
-	info->eat_count = -1;
+	info->eat_count = 0;
 	info->max_eat = 0;
 	info->current_eat = 0;
 	if (info->philo_num <= 0 || info->time_to_die <= 0 || \
