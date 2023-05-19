@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 20:31:32 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/15 21:36:58 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:41:16 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*ft_death_check(void *arg)
 		}
 		sem_post(philo->info->death);
 		sem_wait(philo->info->death);
-		if ((philo->info->eat_count != -1) && \
+		if ((philo->info->eat_counter != -1) && \
 		(philo->info->current_eat >= philo->info->max_eat))
 		{
 			sem_post(philo->info->stop);

@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:45:09 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/16 15:45:25 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:41:27 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_take_fork(t_philo *philo)
 void	ft_eat(t_philo *philo)
 {
 	ft_printf(EAT, philo);
-	if (philo->info->eat_count != -1)
+	if (philo->info->eat_counter != -1)
 		philo->info->current_eat++;
 	usleep(philo->info->time_to_eat * 1000);
 	philo->eating_time = ft_time();

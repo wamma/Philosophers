@@ -6,7 +6,7 @@
 /*   By: hyungjup <hyungjup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:04:21 by hyungjup          #+#    #+#             */
-/*   Updated: 2023/05/16 15:48:46 by hyungjup         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:41:09 by hyungjup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_info
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				eat_count;
+	int				eat_counter;
 	int				max_eat;
 	int				current_eat;
 	sem_t			*forks;
